@@ -271,51 +271,48 @@ my $equipment = {
 
 my $turn_undead = {
     'cleric' => {
-        '1' => [7,9,11,'-','-','-','-','-'],
-        '2' => ['T',7,9,11,'-','-','-','-'],
-        '3' => ['T','T',7,9,11,'-','-','-'],
+        '1' => [10,13,15,17,'-','-','-','-'],
+        '2' => [7,10,13,15,17,'-','-','-'],
+        '3' => [4,7,10,13,15,17,'-','-'],
     },
 };
 
-# Class data to level 3 as per Holmes rules
+# Class data to level 3 as per WB:FMAG
 # Elves are an issue since they can be FM/MU levels 1/1, 2/1, 2/2,
-# 3/2, 3/3 (given that experience is gained in both classes equally in
-# Holmes the other combinations are not possible) so right now we just
-# spit out level 1 characters. At some point I'll fix this and we'll
-# just randomly pick one of those five combinations, or allow the user
-# to choose.
+# 3/2, 3/3 so right now we just spit out level 1 characters. 
+
 my $classes = {
     'magic user' => {
         'armor'   => ['none'],
-        'weapons' => ['Dagger'],
+        'weapons' => ['Dagger','Staff'],
         'level' => {
             # [min-xp,max-xp,HD,sav,l1,l2,l3,l4,l5,l6,title]
-            '1'  => [0,2499,'1d4',[15,14,13,13,16],1,0,0,0,0,0,'medium'],
-            '2'  => [2500,4999,'2d4',[15,14,13,13,16],2,0,0,0,0,0,'conjurer'],
-            '3'  => [5000,9999,'3d4',[15,14,13,13,16],2,0,0,0,0,0,'seer'],
+            '1'  => [0,2499,'1d6',[15,13,15,15,13],1,0,0,0,0,0,''],
+            '2'  => [2500,4999,'1d6+1',[14,12,14,14,12],2,0,0,0,0,0,''],
+            '3'  => [5000,9999,'2d6',[13,11,13,13,11],3,1,0,0,0,0,''],
         },
         'spells' => {
-            '1' => ['Protection from Evil','Read Languages','Read Magic','Shield','Sleep',"Tenser's Floating Disc",'Ventriloquism','Detect Magic','Enlargements','Hold Portal','Light','Magic Missile','Charm Person','Dancing Lights'],
-            '2' => ['Audible Glamer','Continual Light','Darkness','Detect Evil','Detect Invisible','Locate Object','Magic Mouth','ESP','Mirror Image','Phantasmal Forces','Pyrotechnics','Ray of Enfeeblement','Invisibility','Knock','Strength','Web','Levitate','Wizard Lock'],
+            '1' => ['Charm Person','Detect Magic','Hold Portal','Light','Protection from Chaos','Read Languages','Read Magic','Sleep'],
+            '2' => ['Detect Chaos','Detect Invisiblity','Detect Thoughts (ESP)','Invisibility','Knock','Levitate','Light, Continual','Locate Object','Phantasmal Force','Web','Wizard Lock'],
         },
         'xp_bonus' => {
             'int' => {
-                3  => -20,
-                4  => -20,
-                5  => -20,
-                6  => -20,
-                7  => -10,
-                8  => -10,
+                3  => 0,
+                4  => 0,
+                5  => 0,
+                6  => 0,
+                7  => 0,
+                8  => 0,
                 9  => 0,
                 10 => 0,
                 11 => 0,
                 12 => 0,
                 13 => 5,
                 14 => 5,
-                15 => 10,
-                16 => 10,
-                17 => 10,
-                18 => 10,
+                15 => 5,
+                16 => 5,
+                17 => 5,
+                18 => 5,
             },
         },
     },
