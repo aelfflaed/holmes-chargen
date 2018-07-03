@@ -25,23 +25,23 @@ use Tie::IxHash;
 
 # Attribute bonuses
 my $cha_bonuses = {
-    # 'score' => [max hirelings]
-    '3'  => ['Not more than 1, Loyalty -2'],
-    '4'  => ['Not more than 1, Loyalty -2'],
-    '5'  => ['Not more than 2, Loyalty -2'],
-    '6'  => ['Not more than 2, Loyalty -2'],
-    '7'  => ['Not more than 3, Loyalty -1'],
-    '8'  => ['Not more than 3, Loyalty -1'],
-    '9'  => ['Not more than 4, Loyalty +0'],
-    '10' => ['Not more than 4, Loyalty +0'],
-    '11' => ['Not more than 4, Loyalty +0'],
-    '12' => ['Not more than 4, Loyalty +0'],
-    '13' => ['Not more than 5, Loyalty +1'],
-    '14' => ['Not more than 5, Loyalty +1'],
-    '15' => ['Not more than 6, Loyalty +1'],
-    '16' => ['Not more than 6, Loyalty +2'],
-    '17' => ['Not more than 7, Loyalty +2'],
-    '18' => ['Not more than 7, Loyalty +3'],
+    # 'score' => [max hirelings, loyalty]
+    '3'  => ['Not more than 1, '-2'],
+    '4'  => ['Not more than 1, '-2'],
+    '5'  => ['Not more than 2, '-2'],
+    '6'  => ['Not more than 2, '-2'],
+    '7'  => ['Not more than 3, '-1'],
+    '8'  => ['Not more than 3, '-1'],
+    '9'  => ['Not more than 4, '+0'],
+    '10' => ['Not more than 4, '+0'],
+    '11' => ['Not more than 4, '+0'],
+    '12' => ['Not more than 4, '+0'],
+    '13' => ['Not more than 5, '+1'],
+    '14' => ['Not more than 5, '+1'],
+    '15' => ['Not more than 6, '+1'],
+    '16' => ['Not more than 6, '+2'],
+    '17' => ['Not more than 7, '+2'],
+    '18' => ['Not more than 7, '+3'],
 };
 
 my $dex_bonuses = {
