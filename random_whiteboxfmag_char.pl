@@ -26,22 +26,22 @@ use Tie::IxHash;
 # Attribute bonuses
 my $cha_bonuses = {
     # 'score' => [max hirelings]
-    '3'  => ['Not more than 1'],
-    '4'  => ['Not more than 1'],
-    '5'  => ['Not more than 2'],
-    '6'  => ['Not more than 2'],
-    '7'  => ['Not more than 3'],
-    '8'  => ['Not more than 3'],
-    '9'  => ['Not more than 4'],
-    '10' => ['Not more than 4'],
-    '11' => ['Not more than 4'],
-    '12' => ['Not more than 4'],
-    '13' => ['Not more than 5'],
-    '14' => ['Not more than 5'],
-    '15' => ['Not more than 6'],
-    '16' => ['Not more than 6'],
-    '17' => ['Not more than 7'],
-    '18' => ['Not more than 7'],
+    '3'  => ['Not more than 1, Loyalty -2'],
+    '4'  => ['Not more than 1, Loyalty -2'],
+    '5'  => ['Not more than 2, Loyalty -2'],
+    '6'  => ['Not more than 2, Loyalty -2'],
+    '7'  => ['Not more than 3, Loyalty -1'],
+    '8'  => ['Not more than 3, Loyalty -1'],
+    '9'  => ['Not more than 4, Loyalty +0'],
+    '10' => ['Not more than 4, Loyalty +0'],
+    '11' => ['Not more than 4, Loyalty +0'],
+    '12' => ['Not more than 4, Loyalty +0'],
+    '13' => ['Not more than 5, Loyalty +1'],
+    '14' => ['Not more than 5, Loyalty +1'],
+    '15' => ['Not more than 6, Loyalty +1'],
+    '16' => ['Not more than 6, Loyalty +2'],
+    '17' => ['Not more than 7, Loyalty +2'],
+    '18' => ['Not more than 7, Loyalty +3'],
 };
 
 my $dex_bonuses = {
@@ -1011,8 +1011,8 @@ sub printable_class {
     my $args = shift;
 
     my $class = $$args{class};
-    return "Fighting-Man" if $class eq 'fighter';
-    return "Fighting-Man/Magic-User" if $class eq 'fighter/magic user';
+    return "Fighter" if $class eq 'fighter';
+    return "Fighter/Magic-User" if $class eq 'fighter/magic user';
     return "Magic-User" if $class eq 'magic user';
     return "Cleric" if $class eq 'cleric';
     return "Thief" if $class eq 'thief';
@@ -1142,7 +1142,7 @@ if ( $$char{class} =~ 'magic user' ) {
 print "WIS: ",sprintf('%2d',$$char{wis}), print_bonuses($$char{wis_bonuses}),"\n";
 print "CON: ",sprintf('%2d',$$char{con}), print_bonuses($$char{con_bonuses}),"\n";
 print "DEX: ",sprintf('%2d',$$char{dex}), print_bonuses($$char{dex_bonuses}),"\n";
-print "CHA: ",sprintf('%2d',$$char{cha})," (Followers: $$char{max_retainers})\n\n";
+print "CHA: ",sprintf('%2d',$$char{cha}), print_bonuses($$char{cha_bonuses}),"\n";
 
 print "HP: $$char{hp}\n";
 print "AC: $$char{ac}\n";
