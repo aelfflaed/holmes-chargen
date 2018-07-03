@@ -1124,8 +1124,7 @@ return "   Thievery: \t\t" . $skills->[0] ;
 # 'use_dex_ac' = 1 if dexterity modifies armor class
 # 'num_dice' is typically 3 or 4 - how many d6 we roll for each attribute
 # 'race' is exactly one of human, halfling, elf, or dwarf
-# 'class' is exactly one of 'figting man', thief, cleric, or 'fighter
-/magic user'
+# 'class' is exactly one of 'figting man', thief, cleric, or 'fighter/magic user'
 my $char = gen_char({ 'use_dex_ac' => 0, 'level' => 1, num_dice => 3, class => '', 'race' => ''});
 
 print "\n\nA White Box: Fantastic Medieval Adventure Game Character\n";
