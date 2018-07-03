@@ -26,22 +26,22 @@ use Tie::IxHash;
 # Attribute bonuses
 my $cha_bonuses = {
     # 'score' => [max hirelings, loyalty]
-    '3'  => ['Not more than 1, '-2'],
-    '4'  => ['Not more than 1, '-2'],
-    '5'  => ['Not more than 2, '-2'],
-    '6'  => ['Not more than 2, '-2'],
-    '7'  => ['Not more than 3, '-1'],
-    '8'  => ['Not more than 3, '-1'],
-    '9'  => ['Not more than 4, '+0'],
-    '10' => ['Not more than 4, '+0'],
-    '11' => ['Not more than 4, '+0'],
-    '12' => ['Not more than 4, '+0'],
-    '13' => ['Not more than 5, '+1'],
-    '14' => ['Not more than 5, '+1'],
-    '15' => ['Not more than 6, '+1'],
-    '16' => ['Not more than 6, '+2'],
-    '17' => ['Not more than 7, '+2'],
-    '18' => ['Not more than 7, '+3'],
+    '3'  => ['1','-2'],
+    '4'  => ['1','-2'],
+    '5'  => ['2','-2'],
+    '6'  => ['2','-2'],
+    '7'  => ['3','-1'],
+    '8'  => ['3','-1'],
+    '9'  => ['4','+0'],
+    '10' => ['4','+0'],
+    '11' => ['4','+0'],
+    '12' => ['4','+0'],
+    '13' => ['5','+1'],
+    '14' => ['5','+1'],
+    '15' => ['6','+1'],
+    '16' => ['6','+2'],
+    '17' => ['7','+2'],
+    '18' => ['7','+3'],
 };
 
 my $dex_bonuses = {
@@ -135,8 +135,8 @@ my $missile_weapons = {
     'Heavy Crossbow' => '1d6+1',
     'Light Crossbow' => '1d6-1',
 #    'Dagger'         => '1d6',
-    'Spear'          => '1d6',
-    'Sling'          => '1d6',
+    'Spear'       => '1d6',
+    'Sling'       => '1d6',
     'None'           => '',
 };
 
@@ -144,15 +144,15 @@ my $missile_weapons = {
 my $melee_weapons = {
     'Battle Axe'       => '1d6+1',
     'Hand Axe'         => '1d6',
-    'Club'             => '1d6',    
-    'Dagger'           => '1d6-1',
-    'Flail'            => '1d6',
-    'Mace'             => '1d6',
+    'Club'         => '1d6',    
+    'Dagger'          => '1d6-1',
+    'Flail'          => '1d6',
+    'Mace'          => '1d6',
     'Morningstar'      => '1d6',
     'Pole Arm'         => '1d6+1',
 #    'Halberd'          => '1d6',
-    'Spear'            => '1d6',
-    'Staff'            => '1d6',
+    'Spear'          => '1d6',
+    'Staff'          => '1d6',
     'Long Sword'       => '1d6',
     'Short Sword'      => '1d6-1',
     'Two-handed Sword' => '1d6+1',
@@ -166,7 +166,7 @@ my $ancillary_equipment = {
     'Short Bow'      => 'Quiver & 20 arrows',
     'Heavy Crossbow' => 'Case & 30 quarrels',
     'Light Crossbow' => 'Case & 30 quarrels',
-    'Sling'          => 'Pouch & 20 stones',
+    'Sling'        => 'Pouch & 20 stones',
 };
 
 # Equipment from http://www.necropraxis.com/2012/07/20/odd-equipment/,
@@ -286,10 +286,10 @@ my $classes = {
         'armor'   => ['none'],
         'weapons' => ['Dagger','Staff'],
         'level' => {
-            # [min-xp,max-xp,HD,sav,l1,l2,l3,l4,l5,l6,title]
-            '1'  => [0,2499,'1d6',[15,13,15,15,13],1,0,0,0,0,0,''],
-            '2'  => [2500,4999,'1d6+1',[14,12,14,14,12],2,0,0,0,0,0,''],
-            '3'  => [5000,9999,'2d6',[13,11,13,13,11],3,1,0,0,0,0,''],
+            # [min-xp,max-xp,HD,sav,l1,l2,l3,l4,l5,l6,hit]
+            '1'  => [0,2499,'1d6',[15,13,15,15,13],1,0,0,0,0,0,0],
+            '2'  => [2500,4999,'1d6+1',[14,12,14,14,12],2,0,0,0,0,0,0],
+            '3'  => [5000,9999,'2d6',[13,11,13,13,11],3,1,0,0,0,0,0],
         },
         'spells' => {
             '1' => ['Charm Person','Detect Magic','Hold Portal','Light','Protection from Chaos','Read Languages','Read Magic','Sleep'],
@@ -320,10 +320,10 @@ my $classes = {
         'armor'   => ['any'],
         'weapons' => ['Club','Flail','Mace','Morningstar','Staff'],
         'level' => {
-            # [min-xp,max-xp,HD,sav,bhb,l1,l2,l3,l4,l5,title]
-            '1'  => [0,1499,'1d6',[13,15,13,15,15],0,0,0,0,0,''],
-            '2'  => [1500,2999,'2d6',[12,14,12,14,14],1,0,0,0,0,''],
-            '3'  => [3000,5999,'3d6',[11,13,11,13,13],2,0,0,0,0,''],
+            # [min-xp,max-xp,HD,sav,bhb,l1,l2,l3,l4,l5,hit]
+            '1'  => [0,1499,'1d6',[13,15,13,15,15],0,0,0,0,0,0],
+            '2'  => [1500,2999,'2d6',[12,14,12,14,14],1,0,0,0,0,0],
+            '3'  => [3000,5999,'3d6',[11,13,11,13,13],2,0,0,0,0,0],
         },
         'spells' => {
             '1' => ['Cure Light Wounds','Detect Chaos','Detect Magic','Light','Protection from Chaos','Purify Food and Water'],
@@ -354,10 +354,10 @@ my $classes = {
         'armor'   => ['any'],
         'weapons' => ['any'],
         'level'   => {
-            # [min-xp,max-xp,HD,sav,title]
-            '1'  => [0,1999,'1d6+1',[12,14,14,14,14],''],
-            '2'  => [2000,3999,'2d6',[11,13,13,13,13],''],
-            '3'  => [4000,7999,'3d6',[10,12,12,12,12],''],
+            # [min-xp,max-xp,HD,sav,hit]
+            '1'  => [0,1999,'1d6+1',[12,14,14,14,14],0],
+            '2'  => [2000,3999,'2d6',[11,13,13,13,13],1],
+            '3'  => [4000,7999,'3d6',[10,12,12,12,12],2],
         },
         xp_bonus => {
             'str' => {
@@ -385,10 +385,10 @@ my $classes = {
         'armor'   => ['leather'],
         'weapons' => ['any'],
         'level'   => {
-            # [min-xp,max-xp,HD,sav,skills,halfling skills,title]
-            '1'  => [0,1199,'1d6',[14,14,14,14,14],   [2],[2],''],
-            '2'  => [1200,2399,'2d6',[11,13,13,13,13],[2],[2],''],
-            '3'  => [2400,-1,'3d6',[10,12,12,12,12],  [2],[2],''],
+            # [min-xp,max-xp,HD,sav,skills,halfling skills,hit]
+            '1'  => [0,1199,'1d6',[14,14,14,14,14],   [2],[2],0],
+            '2'  => [1200,2399,'2d6',[11,13,13,13,13],[2],[2],0],
+            '3'  => [2400,-1,'3d6',[10,12,12,12,12],  [2],[2],0],
         },
         xp_bonus => {
             'dex' => {
@@ -415,10 +415,10 @@ my $classes = {
         'armor'   => ['any'],
         'weapons' => ['any'],
         'level'   => {
-            # [min-xp,max-xp,HD,sav,title]
-            '1'  => [0,4999,'1d6+1',[14,14,14,14,14],''],
-            '2'  => [5000,9999,'2d6',[13,13,13,13,13],''],
-            '3'  => [10000,19999,'2d6+1',[12,12,12,12,12],''],
+            # [min-xp,max-xp,HD,sav,hit]
+            '1'  => [0,4999,'1d6+1',[14,14,14,14,14],0],
+            '2'  => [5000,9999,'2d6',[13,13,13,13,13],1],
+            '3'  => [10000,19999,'2d6+1',[12,12,12,12,12],1],
         },
         'spells' => {
             '1' => ['Charm Person','Detect Magic','Hold Portal','Light','Protection from Chaos','Read Languages','Read Magic','Sleep'],
@@ -488,7 +488,7 @@ Halflings are extremely accurate with missiles and fire any missile at
     'elf'      => q{
 Elves can use all the weapons and armor of the fighter, including
 all magical weapons, and can also cast spells like a magic-user. They 
-have the same weapon and armor restrictyions as magic users with the 
+have the same weapon and armor restrictions as magic users with the 
 exception of magic armor.  They can detect secret hidden doors on a 
 1-4 on d6 if looking, 1-2 on d6 if not. Elves can speak the languages of
 orcs, hobgoblins and gnolls as well as Elvish and the Common speech.
@@ -804,8 +804,8 @@ sub gen_xp_bonus {
     my $dex = $$args{dex};
     my $bonus = 0;
     
-    if ( $wis > 14 ) {$bonus += 5;}
-    if ( $cha > 14 ) {$bonus += 5;}
+    $bonus += 5 if ( $wis > 14 );
+    $bonus += 5 if ( $cha > 14 );
 
     if ( $$classes{$class}{'xp_bonus'}{'str'} ) {
         $bonus += $$classes{$class}{'xp_bonus'}{'str'}{$str};
@@ -1018,6 +1018,49 @@ sub printable_class {
     return "Thief" if $class eq 'thief';
 }
 
+sub gen_bhb_melee {
+	my $args = shift;
+	
+	my $class = $$args{class};
+    my $str	  = $$args{str};
+    my $level = $$args{level};
+    
+    my $bhb_melee = 0;
+    $bhb_melee += $$classes{$class}{'level'}{$level}->[10];
+    
+    if ($class eq 'fighter' && $str >= 15){
+        $bhb_melee += 1; 
+    }
+    
+	return $bhb_melee;
+}
+
+sub gen_bhb_missile {
+	my $args = shift;
+	
+	my $class = $$args{class};
+    my $dex	  = $$args{dex};
+    my $level = $$args{level};
+    my $race  = $$args{race};
+    
+    my $bhb_missile = 0;
+    
+    $bhb_missile += $$classes{$class}{'level'}{$level}->[10];
+    
+    if ($dex >= 15) {
+        $bhb_missile += 1;
+    } 
+    elsif ($dex <= 6) {
+        $bhb_missile -= 1;
+    }
+    
+    if ($race eq 'halfling') {
+        $bhb_missile += 2;
+    } 
+
+	return $bhb_missile;
+}
+
 # Return an ordered hashref populated with random character data
 sub gen_char
 {
@@ -1086,10 +1129,14 @@ sub gen_char
         'chance_know'         => $$int_bonuses{$int}->[1],
         'min_spells'          => $$int_bonuses{$int}->[2],
         'max_spells'          => $$int_bonuses{$int}->[3],
+        'max_hirelings'       => $$cha_bonuses{$cha}->[0],
+        'loyalty'             => $$cha_bonuses{$cha}->[1],
         'alignment'           => $align,
         'equipment'           => gen_equipment({'class' => $class}),
         'skills'              => gen_thief_skills({'class' => $class, 'race' => $race, 'level' => $level}),
         'ancillary_equipment' => $$ancillary_equipment{$missile_weapon} || '',
+        'bhb_melee'			  => gen_bhb_melee({'class' => $class, 'level' => $level, 'str' => $str}),
+        'bhb_missile'		  => gen_bhb_missile({'class' => $class, 'level' => $level, 'dex' => $dex, 'race' => $race}),
     );
 
     return \%char;
@@ -1106,14 +1153,14 @@ sub print_bonuses {
 sub print_saving_throws {
     my $saves = shift;
 
-    return "   Spell or Staff: \t" . $saves->[0] . "\n   Magical Wand: \t" . $saves->[1] . "\n   Death Ray/Poison: \t" . $saves->[2] . "\n   Turned to Stone: \t" . $saves->[3] . "\n   Dragon Breath: \t" . $saves->[4];
+    return "   Spell or Staff: \t" . $saves->[0] . "\n   Magical Wand: \t" . $saves->[1] . "\n   Death Ray/Poison: \t" . $saves->[2] . "\n  *Turned to Stone: \t" . $saves->[3] . "\n   Dragon Breath: \t" . $saves->[4];
 }
 
 sub print_thief_skills {
     my $skills = shift;
 
  #   return "   Open Lock: \t\t" . $skills->[0] . "%\n   Remove Trap: \t" . $skills->[1] . "%\n   Pick Pocket: \t" . $skills->[2] . "%\n   Move Silently: \t" . $skills->[3] . "%\n   Climb: \t\t" . $skills->[4] . "%\n   Hide in Shadows: \t" . $skills->[5] . "%\n   Hear Noise: \t\t" . $skills->[6];
-return "   Thievery: \t\t" . $skills->[0] ;
+return "Thievery: \t\t" . $skills->[0] ;
 }
 
 
@@ -1124,30 +1171,27 @@ return "   Thievery: \t\t" . $skills->[0] ;
 # 'use_dex_ac' = 1 if dexterity modifies armor class
 # 'num_dice' is typically 3 or 4 - how many d6 we roll for each attribute
 # 'race' is exactly one of human, halfling, elf, or dwarf
-# 'class' is exactly one of 'figting man', thief, cleric, or 'fighter/magic user'
+# 'class' is exactly one of 'fighter', thief, cleric, or 'fighter/magic user'
 my $char = gen_char({ 'use_dex_ac' => 0, 'level' => 1, num_dice => 3, class => '', 'race' => ''});
 
 print "\n\nA White Box: Fantastic Medieval Adventure Game Character\n";
 print "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\n\n";
 print "Name: ",gen_name(),"\n\n";
+
 print "Level $$char{level} ",ucfirst($$char{race})," ",printable_class({'class' => $$char{class}}),"\n";
-print "Alignment: $$char{alignment}\n";
+print "Alignment: $$char{alignment}\n\n";
 
 print "STR: ",sprintf('%2d',$$char{str}), print_bonuses($$char{str_bonuses}),"\n";
-if ( $$char{class} =~ 'magic user' ) {
-    print "INT: ",sprintf('%2d',$$char{int})," (% Know Spell: $$char{chance_know} Min: $$char{min_spells} Max: $$char{max_spells} Languages: $$char{languages})\n";
-} else {
-    print "INT: ",sprintf('%2d',$$char{int})," (Languages: $$char{languages})\n";
-}
-
+print "INT: ",sprintf('%2d',$$char{int}), " (Languages: $$char{languages})\n";
 print "WIS: ",sprintf('%2d',$$char{wis}), print_bonuses($$char{wis_bonuses}),"\n";
 print "CON: ",sprintf('%2d',$$char{con}), print_bonuses($$char{con_bonuses}),"\n";
 print "DEX: ",sprintf('%2d',$$char{dex}), print_bonuses($$char{dex_bonuses}),"\n";
-print "CHA: ",sprintf('%2d',$$char{cha}), $$char{cha_bonuses},"\n";
+print "CHA: ",sprintf('%2d',$$char{cha}), " (Max Hirelings: $$char{max_hirelings}, Loyalty: $$char{loyalty})\n\n";
 
 print "HP: $$char{hp}\n";
 print "AC: $$char{ac}\n";
-print "XP Bonus: ",$$char{xp_bonus} ? "$$char{xp_bonus}%" : 'None',"\n";
+print "XP Bonus: ",$$char{xp_bonus} ? "$$char{xp_bonus}%" : 'None',"\n\n";
+
 print "Saves: \n",print_saving_throws($$char{sav}),"\n\n";
 
 print "Spells: ",ucfirst($$char{spells}),"\n\n" if ($$char{class} eq 'magic user' || $$char{race} eq 'elf');
@@ -1161,19 +1205,40 @@ if ($$char{class} eq 'cleric') {
     print "  Ghoul: \t",$turn[2],"\n\n";
 }
 
-print "Armor: ",ucfirst($$char{armor}),"\n";
-print "Shield: ",$$char{shield} eq 'shield' ? 'Yes' : 'None',"\n";
+print print_thief_skills($$char{skills}),"\n\n" if ($$char{class} eq 'thief');
 
-print "Weapons:\n $$char{melee_weapon}\n";
-print " $$char{missile_weapon}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
+print "Armor: ",ucfirst($$char{armor}),"\n";
+print "Shield: ",$$char{shield} eq 'shield' ? 'Yes' : 'None',"\n\n";
+
+print "Base Hit Bonus:\n";
+print "Melee\t",$$char{bhb_melee},"\n";
+print "Missile\t",$$char{bhb_missile},"\n\n";
+
+print "Weapons\t\t\tDamage\n";
+
+if (length($$char{melee_weapon}) < 7){
+    print " $$char{melee_weapon}\t\t\t$$char{melee_damage}\n";
+} 
+elsif (length($$char{melee_weapon}) >15){
+    print " $$char{melee_weapon}\t$$char{melee_damage}\n";
+} 
+else {
+print " $$char{melee_weapon}\t\t$$char{melee_damage}\n";
+}
+
+if (length($$char{missile_weapon}) < 7){
+print " $$char{missile_weapon}\t\t\t$$char{missile_damage}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
+} 
+else {
+print " $$char{missile_weapon}\t\t$$char{missile_damage}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
+}
 
 print "\nEquipment:\n";
 print " ",join "\n",split ",",$$char{equipment};
-print "\n $$char{ancillary_equipment}\n";
-
-print "\nThief Skills: \n",print_thief_skills($$char{skills}),"\n\n" if ($$char{class} eq 'thief');
+print "\n $$char{ancillary_equipment}\n\n";
 
 if ( $$char{race} ne 'human' ) {
     print "\nRacial Abilities:\n";
     print "$$char{race_abilities}\n\n";
 }
+
