@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 #
-# Random Holmes Basic D&D character generator
+# Random White Box Fantastic Medieval Adventure Game character generator.
 #
-# Copyright 2016 Doug Maxwell <doug@unixlore.net>
+# forked from dmaxwell/holmes-chargen Copyright 2016 Doug Maxwell <doug@unixlore.net>
+# This version Copyright 2018 Beth Peters <aelfflaed@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,22 +26,22 @@ use Tie::IxHash;
 # Attribute bonuses
 my $cha_bonuses = {
     # 'score' => [max hirelings]
-    '3'  => ['Not more than 5'],
-    '4'  => ['Not more than 5'],
-    '5'  => ['Not more than 5'],
-    '6'  => ['Not more than 5'],
-    '7'  => ['Not more than 5'],
-    '8'  => ['Not more than 5'],
-    '9'  => ['Not more than 5'],
-    '10' => ['Not more than 5'],
-    '11' => ['Not more than 5'],
-    '12' => ['Not more than 5'],
-    '13' => ['Can have any number'],
-    '14' => ['Can have any number'],
-    '15' => ['Can have any number'],
-    '16' => ['Can have any number'],
-    '17' => ['Can have any number'],
-    '18' => ['Can have any number'],
+    '3'  => ['Not more than 1'],
+    '4'  => ['Not more than 1'],
+    '5'  => ['Not more than 2'],
+    '6'  => ['Not more than 2'],
+    '7'  => ['Not more than 3'],
+    '8'  => ['Not more than 3'],
+    '9'  => ['Not more than 4'],
+    '10' => ['Not more than 4'],
+    '11' => ['Not more than 4'],
+    '12' => ['Not more than 4'],
+    '13' => ['Not more than 5'],
+    '14' => ['Not more than 5'],
+    '15' => ['Not more than 6'],
+    '16' => ['Not more than 6'],
+    '17' => ['Not more than 7'],
+    '18' => ['Not more than 7'],
 };
 
 my $dex_bonuses = {
@@ -49,14 +50,14 @@ my $dex_bonuses = {
     '4'  => '-1',
     '5'  => '-1',
     '6'  => '-1',
-    '7'  => '-1',
-    '8'  => '-1',
+    '7'  => '+0',
+    '8'  => '+0',
     '9'  => '+0',
     '10' => '+0',
     '11' => '+0',
     '12' => '+0',
-    '13' => '+1',
-    '14' => '+1',
+    '13' => '+0',
+    '14' => '+0',
     '15' => '+1',
     '16' => '+1',
     '17' => '+1',
@@ -75,12 +76,12 @@ my $con_bonuses = {
     '10' => 0,
     '11' => 0,
     '12' => 0,
-    '13' => 1,
-    '14' => 1,
+    '13' => 0,
+    '14' => 0,
     '15' => 1,
     '16' => 1,
-    '17' => 2,
-    '18' => 3,
+    '17' => 1,
+    '18' => 1,
 };
 
 my $printable_con = {
@@ -95,32 +96,32 @@ my $printable_con = {
     '10' => ['+0'],
     '11' => ['+0'],
     '12' => ['+0'],
-    '13' => ['+1'],
-    '14' => ['+1'],
+    '13' => ['+0'],
+    '14' => ['+0'],
     '15' => ['+1'],
     '16' => ['+1'],
-    '17' => ['+2'],
-    '18' => ['+3'],
+    '17' => ['+1'],
+    '18' => ['+1'],
 };
 
 my $int_bonuses = {
     # Additional languages, % chance to know spell, min spells, max spells
-    '3'  => ['None','20%',2,3],
-    '4'  => ['None','20%',2,3],
-    '5'  => ['None','30%',2,4],
-    '6'  => ['None','30%',,2,4],
-    '7'  => ['None','30%',2,4],
-    '8'  => ['None','40%',3,5],
-    '9'  => ['None','40%',3,5],
-    '10' => ['None','50%',4,6],
-    '11' => ['+1','50%',4,6],
-    '12' => ['+2','50%',4,6],
-    '13' => ['+3','65%',5,8],
-    '14' => ['+4','65%',5,8],
-    '15' => ['+5','75%',6,10],
-    '16' => ['+6','75%',6,10],
-    '17' => ['+7','85%',7,'All'],
-    '18' => ['+8','95%',8,'All'],
+    '3'  => ['None','100%',1,'All'],
+    '4'  => ['None','100%',1,'All'],
+    '5'  => ['None','100%',1,'All'],
+    '6'  => ['None','100%',1,'All'],
+    '7'  => ['None','100%',1,'All'],
+    '8'  => ['None','100%',1,'All'],
+    '9'  => ['None','100%',1,'All'],
+    '10' => ['None','100%',1,'All'],
+    '11' => ['+1','100%',1,'All'],
+    '12' => ['+2','100%',1,'All'],
+    '13' => ['+3','100%',1,'All'],
+    '14' => ['+4','100%',1,'All'],
+    '15' => ['+5','100%',1,'All'],
+    '16' => ['+6','100%',1,'All'],
+    '17' => ['+7','100%',1,'All'],
+    '18' => ['+8','100%',1,'All'],
 };
 
 # Weapons
