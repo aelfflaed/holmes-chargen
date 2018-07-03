@@ -191,7 +191,7 @@ my $equipment = {
         18 => q{leather back pack, large sack, water/wine skin, lantern, 4 flasks oil, 1 week iron rations, 50' of rope, silver cross, holy water/vial, 12 iron spikes, belladona - bunch, 3 stakes & mallet, small sack, 10 GP},
     },
 
-    'fighting man' => {
+    'fighter' => {
         3 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 50' of rope, 3 GP},
         4 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 10' pole, 1 GP},
         5 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 50' of rope, 3 GP},
@@ -230,7 +230,7 @@ my $equipment = {
     },
 
 
-    'fighting man/magic user' => {
+    'fighter/magic user' => {
         3 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 50' of rope, 3 GP},
         4 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 10' pole, 1 GP},
         5 => q{6 torches, leather back pack, large sack, water/wine skin, 1 week iron rations, 50' of rope, 3 GP},
@@ -350,33 +350,33 @@ my $classes = {
             },
         },
     },
-    'fighting man' => {
+    'fighter' => {
         'armor'   => ['any'],
         'weapons' => ['any'],
         'level'   => {
             # [min-xp,max-xp,HD,sav,title]
-            '1'  => [0,1999,'1d8',[16,13,12,14,15],'veteran'],
-            '2'  => [2000,3999,'2d8',[16,13,12,14,15],'warrior'],
-            '3'  => [4000,7999,'3d8',[16,13,12,14,15],'swordsman'],
+            '1'  => [0,1999,'1d6+1',[13,15,15,15,15],''],
+            '2'  => [2000,3999,'2d6',[12,14,14,14,14],''],
+            '3'  => [4000,7999,'3d6',[11,13,13,13,13],''],
         },
         xp_bonus => {
             'str' => {
-                3  => -20,
-                4  => -20,
-                5  => -20,
-                6  => -20,
-                7  => -10,
-                8  => -10,
+                3  => 0,
+                4  => 0,
+                5  => 0,
+                6  => 0,
+                7  => 0,
+                8  => 0,
                 9  => 0,
                 10 => 0,
                 11 => 0,
                 12 => 0,
-                13 => 5,
-                14 => 5,
-                15 => 10,
-                16 => 10,
-                17 => 10,
-                18 => 10,
+                13 => 0,
+                14 => 0,
+                15 => 5,
+                16 => 5,
+                17 => 5,
+                18 => 5,
             },
         },
     },
