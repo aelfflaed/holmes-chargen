@@ -1143,7 +1143,7 @@ if ( $$char{class} =~ 'magic user' ) {
 print "WIS: ",sprintf('%2d',$$char{wis}), print_bonuses($$char{wis_bonuses}),"\n";
 print "CON: ",sprintf('%2d',$$char{con}), print_bonuses($$char{con_bonuses}),"\n";
 print "DEX: ",sprintf('%2d',$$char{dex}), print_bonuses($$char{dex_bonuses}),"\n";
-print "CHA: ",sprintf('%2d',$$char{cha}), sprintf('%2d',$$char{cha_bonuses}),"\n";
+print "CHA: ",sprintf('%2d',$$char{cha}), $$char{cha_bonuses},"\n";
 
 print "HP: $$char{hp}\n";
 print "AC: $$char{ac}\n";
