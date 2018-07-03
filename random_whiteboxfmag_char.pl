@@ -1063,6 +1063,7 @@ sub gen_char
         'wis_bonuses'         => '',
         'con_bonuses'         => $$printable_con{$con}->[0],
         'dex_bonuses'         => $$dex_bonuses{$dex},
+        'cha_bonuses'         => $$cha_bonuses{$cha},
         'name'                => gen_name(),
         'class'               => $class,
         'race'                => $race,
@@ -1142,7 +1143,7 @@ if ( $$char{class} =~ 'magic user' ) {
 print "WIS: ",sprintf('%2d',$$char{wis}), print_bonuses($$char{wis_bonuses}),"\n";
 print "CON: ",sprintf('%2d',$$char{con}), print_bonuses($$char{con_bonuses}),"\n";
 print "DEX: ",sprintf('%2d',$$char{dex}), print_bonuses($$char{dex_bonuses}),"\n";
-print "CHA: ",sprintf('%2d',$$char{cha}), print_bonuses($$char{cha_bonuses}),"\n";
+print "CHA: ",sprintf('%2d',$$char{cha}), sprintf('%2d',$$char{cha_bonuses}),"\n";
 
 print "HP: $$char{hp}\n";
 print "AC: $$char{ac}\n";
