@@ -1068,7 +1068,6 @@ sub gen_char
         'race'                => $race,
         'race_abilities'      => $race_abilities{$race},
         'level'               => $level,
-        'title'               => gen_title({'class' => $class,'level' => $level}),
         'spells'              => gen_spells({'class' => $class, 'race' => $race, 'level' => $level}),
         'turn_undead'         => exists $$turn_undead{$class} ? join " ", @{$$turn_undead{$class}{$level}} : 'N/A',
         'sav'                 => gen_save({'class' => $class, 'race' => $race, 'level' => $level}),
@@ -1131,7 +1130,6 @@ print "\n\nA White Box: Fantastic Medieval Adventure Game Character\n";
 print "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\n\n";
 print "Name: ",gen_name(),"\n\n";
 print "Level $$char{level} ",ucfirst($$char{race})," ",printable_class({'class' => $$char{class}}),"\n";
-print "Title: ",ucfirst($$char{title}),"\n";
 print "Alignment: $$char{alignment}\n";
 
 print "STR: ",sprintf('%2d',$$char{str}), print_bonuses($$char{str_bonuses}),"\n";
