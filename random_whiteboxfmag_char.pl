@@ -416,50 +416,50 @@ my $classes = {
         'weapons' => ['any'],
         'level'   => {
             # [min-xp,max-xp,HD,sav,title]
-            '1'  => [0,1999,'1d6',[15,13,12,13,15],'veteran/Medium'],
-            '2'  => [2000,3999,'2d6',[15,13,12,13,15],'warrior/Seer'],
-            '3'  => [4000,7999,'3d6',[15,13,12,13,15],'swordsman/Conjurer'],
+            '1'  => [0,4999,'1d6+1',[14,14,14,14,14],''],
+            '2'  => [5000,9999,'2d6',[13,13,13,13,13],''],
+            '3'  => [10000,19999,'2d6+1',[12,12,12,12,12],''],
         },
         'spells' => {
-            '1' => ['Protection from Evil','Read Languages','Read Magic','Shield','Sleep',"Tenser's Floating Disc",'Ventriloquism','Detect Magic','Enlargements','Hold Portal','Light','Magic Missile','Charm Person','Dancing Lights'],
-            '2' => ['Audible Glamer','Continual Light','Darkness','Detect Evil','Detect Invisible','Locate Object','Magic Mouth','ESP','Mirror Image','Phantasmal Forces','Pyrotechnics','Ray of Enfeeblement','Invisibility','Knock','Strength','Web','Levitate','Wizard Lock'],
+            '1' => ['Charm Person','Detect Magic','Hold Portal','Light','Protection from Chaos','Read Languages','Read Magic','Sleep'],
+            '2' => ['Detect Chaos','Detect Invisiblity','Detect Thoughts (ESP)','Invisibility','Knock','Levitate','Light, Continual','Locate Object','Phantasmal Force','Web','Wizard Lock'],
         },
         xp_bonus => {
             'str' => {
-                3  => -20,
-                4  => -20,
-                5  => -20,
-                6  => -20,
-                7  => -10,
-                8  => -10,
+                3  => 0,
+                4  => 0,
+                5  => 0,
+                6  => 0,
+                7  => 0,
+                8  => 0,
                 9  => 0,
                 10 => 0,
                 11 => 0,
                 12 => 0,
-                13 => 5,
-                14 => 5,
-                15 => 10,
-                16 => 10,
-                17 => 10,
-                18 => 10,
+                13 => 0,
+                14 => 0,
+                15 => 5,
+                16 => 5,
+                17 => 5,
+                18 => 5,
             },
             'int' => {
-                3  => -20,
-                4  => -20,
-                5  => -20,
-                6  => -20,
-                7  => -10,
-                8  => -10,
+                3  => 0,
+                4  => 0,
+                5  => 0,
+                6  => 0,
+                7  => 0,
+                8  => 0,
                 9  => 0,
                 10 => 0,
                 11 => 0,
                 12 => 0,
-                13 => 5,
-                14 => 5,
-                15 => 10,
-                16 => 10,
-                17 => 10,
-                18 => 10,
+                13 => 0,
+                14 => 0,
+                15 => 5,
+                16 => 5,
+                17 => 5,
+                18 => 5,
             },
         },
     },
@@ -474,31 +474,31 @@ my $armor = {
 };
 
 my $base_ac      = 9;
-my $max_xp_bonus = 10;
-my $max_xp_penalty = -20;
+my $max_xp_bonus = 15;
+my $max_xp_penalty = 0;
 
 my %race_abilities = (
     'halfling' => q{
 Out-of-doors Halflings are difficult to see, having the ability to
-vanish into woods or undergrowth. They are like dwarves in their
-resistance to magic. Halflings are extremely accurate with missiles
-and fire any missile at + 1.
+vanish into woods or undergrowth with 1-5 on a d6. They are like 
+dwarves in their resistance to magic, +4 on saving throws against magic. 
+Halflings are extremely accurate with missiles and fire any missile at 
++ 1.  Giant type creatures inflict half damage on halflings.
 },
     'elf'      => q{
 Elves can use all the weapons and armor of the fighter, including
-all magical weapons, and can also cast spells like a magic-user. They
-can detect secret hidden doors about one-third of the time. They have
-infravision; like dwarves, they can see 60 feet in the dark.  They are
-not paralyzed by the touch of ghouls. Elves can speak the languages of
+all magical weapons, and can also cast spells like a magic-user. They 
+have the same weapon and armor restrictyions as magic users with the 
+exception of magic armor.  They can detect secret hidden doors on a 
+1-4 on d6 if looking, 1-2 on d6 if not. Elves can speak the languages of
 orcs, hobgoblins and gnolls as well as Elvish and the Common speech.
 },
     'dwarf'    => q{
-Dwarves are sturdy fighters and are especially resistant to magic as
-shown by their better saving throws against magical attack. They have
-infravision and can see 60 feet in the dark. Underground, they can
+Dwarves are sturdy fighters and are especially resistant to magic, 
++4 on saving throws against magic. Underground, they can
 detect slanting passages, traps, shifting wails and new construction
-about one-third of the time. They are the only ones who can wield the
-+3 Magic War Hammer. Dwarves can all speak the languages of gnomes,
+on a 1-4 on d6 if looking, 1-2 on d6 if not.  Giant type creatures 
+inflict half damage on dwarves. Dwarves can all speak the languages of gnomes,
 kobolds and goblins.
 },
     'human'    => q{},
@@ -592,25 +592,6 @@ sub roll_nd8 {
     return $res;
 }
 
-sub gen_age {
-
-    my $args  = shift;
-    my $race  = $$args{race}  || 'human';
-    my $level = $$args{level} || 1;
-    my $ages  = {
-        dwarf    => [56,114,5],
-        halfling => [33,54,3],
-        elf      => [180,454,20],
-        human    => [20,38,2],
-    };
-    my $start_age   = $$ages{$race}->[0];
-    my $end_age     = $$ages{$race}->[1];
-    my $level_fudge = $level * $$ages{$race}->[2];
-
-    return (int(rand($end_age-$start_age+1))+$start_age)+$level_fudge;
-
-};
-
 sub sum_array {
 
     my $sum = 0;
@@ -680,15 +661,15 @@ sub gen_weapon {
 
     my $allowed_weapons = {
         'melee' => {
-            'magic user' => ['Dagger'],
-            'cleric' => ['Flail','Mace','Morningstar'],
+            'magic user' => ['Dagger','Staff'],
+            'cleric' => ['Club','Flail','Mace','Morningstar','Staff'],
             'fighter' => \@melee_weapons,
-            'thief' => ['Dagger','Sword','Hand Axe'],
+            'thief' => \@melee_weapons,
             'fighter/magic user' => \@melee_weapons,
         },
         'missile' => {
             'magic user' => ['Dagger'],
-            'cleric' => ['None'],
+            'cleric' => ['Sling'],
             'fighter' => \@missile_weapons,
             'thief' => \@missile_weapons,
             'fighter/magic user' => \@missile_weapons,
@@ -697,10 +678,10 @@ sub gen_weapon {
 
     my $rand = {
         'melee' => {
-            'magic user' => 1,
-            'cleric' => 3,
+            'magic user' => 2,
+            'cleric' => 5,
             'fighter' => scalar(@melee_weapons),
-            'thief' => 3,
+            'thief' => scalar(@melee_weapons),
             'fighter/magic user' => scalar(@melee_weapons),
         },
         'missile' => {
@@ -713,11 +694,6 @@ sub gen_weapon {
     };
 
     my $weapon = $$allowed_weapons{$type}{$class}->[ int(rand($$rand{$type}{$class})) - 1 ];
-
-    if ( $race eq 'halfling' || $race eq 'dwarf' ) {
-        $weapon = 'Sword' if ( $weapon eq 'Two-handed Sword' || $weapon eq 'Pole Arm' || $weapon eq 'Halberd' );
-        $weapon = 'Short Bow' if ( $weapon eq 'Long Bow' || $weapon eq 'Composite Bow' );
-    }
 
     return $weapon;
 }
@@ -760,34 +736,12 @@ sub gen_shield {
     return $shield->[roll_1d2()-1];
 }
 
-sub gen_helmet {
-    my $args = shift;
-
-    my $class = $$args{class};
-    my $helmet = ['helmet','none'];
-
-    return 'none' if ( $class eq 'magic user' || $class eq 'thief' );
-    return $helmet->[roll_1d2()-1];
-}
-
 sub gen_align {
-    my $align = ['Neutral','Lawful Good','Chaotic Good'];
+    my $align = ['Neutral','Lawful','Chaotic'];
 
     return $align->[roll_1d3()-1];
 }
 
-sub gen_gender {
-    my $align = ['Male','Female'];
-
-    return $align->[roll_1d2()-1];
-}
-
-sub gen_deity {
-    my $args = shift;
-
-    my $class = $$args{class};
-    return ( $class eq 'cleric' ) ? 'Crom' : 'None';
-}
 
 sub gen_spells {
     my $args = shift;
@@ -797,7 +751,7 @@ sub gen_spells {
     my $level = $$args{level};
     $level = 1 if ($level < 1);
     $level = 3 if ($level > 3);
-    my $l1_mu_spells = ['Charm Person','Hold Portal','Light','Magic Missile','Protection from Evil','Shield','Sleep','Ventriloquism'];
+    my $l1_mu_spells = ['Charm Person','Detect Magic','Hold Portal','Light','Protection from Chaos','Read Languages','Read Magic','Sleep'];
     return $l1_mu_spells->[roll_1d8()-1] if ( $level == 1 && ($class eq 'magic user' || $race eq 'elf') );
     return 'None' if ( $race ne 'elf' && (($level == 1 && $class eq 'cleric') || $class eq 'fighter' || $class eq 'thief' ));
 
@@ -823,7 +777,7 @@ sub gen_save {
     my $level = $$args{level};
     my $race  = $$args{race};
 
-    return [14,11,10,12,14] if ( $race eq 'dwarf' || $race eq 'halfling' );
+    return [14,10,10,14,10] if ( $race eq 'dwarf' || $race eq 'halfling' );
     return $$classes{$class}{'level'}{$level}->[3];
 }
 
@@ -846,7 +800,12 @@ sub gen_xp_bonus {
     my $str = $$args{str};
     my $int = $$args{int};
     my $wis = $$args{wis};
+    my $cha = $$args{cha};
+    my $dex = $$args{dex};
     my $bonus = 0;
+    
+    if ( $wis > 14 ) {$bonus += 5;}
+    if ( $cha > 14 ) {$bonus += 5;}
 
     if ( $$classes{$class}{'xp_bonus'}{'str'} ) {
         $bonus += $$classes{$class}{'xp_bonus'}{'str'}{$str};
@@ -856,6 +815,9 @@ sub gen_xp_bonus {
     }
     if ( $$classes{$class}{'xp_bonus'}{'wis'} ) {
         $bonus += $$classes{$class}{'xp_bonus'}{'wis'}{$wis};
+    }
+        if ( $$classes{$class}{'xp_bonus'}{'dex'} ) {
+        $bonus += $$classes{$class}{'xp_bonus'}{'wis'}{$dex};
     }
     return ( $bonus > $max_xp_bonus ) ? $max_xp_bonus : $bonus;
     return ( $bonus < $max_xp_penalty ) ? $max_xp_penalty : $bonus;
@@ -1045,15 +1007,6 @@ sub gen_equipment {
     return $$equipment{$class}{roll_3d6()};
 }
 
-sub gen_title {
-    my $args = shift;
-
-    my $class = $$args{class};
-    my $level = $$args{level};
-
-    return $$classes{$class}{'level'}{$level}->[-1];
-}
-
 sub printable_class {
     my $args = shift;
 
@@ -1096,7 +1049,6 @@ sub gen_char
     my $armor           = gen_armor({'class' => $class});
     my $shield          = gen_shield({'class' => $class});
     my $align           = $$args{align} || gen_align();
-    $align = 'Neutral' if ($class eq 'thief');
 
     tie my %char, 'Tie::IxHash';
     %char = (
@@ -1115,9 +1067,6 @@ sub gen_char
         'class'               => $class,
         'race'                => $race,
         'race_abilities'      => $race_abilities{$race},
-        'gender'              => gen_gender(),
-        'age'                 => gen_age({'race' => $race,'level' => $level}),
-        'deity'               => gen_deity({'class' => $class}),
         'level'               => $level,
         'title'               => gen_title({'class' => $class,'level' => $level}),
         'spells'              => gen_spells({'class' => $class, 'race' => $race, 'level' => $level}),
@@ -1129,7 +1078,6 @@ sub gen_char
         'missile_weapon'      => $missile_weapon,
         'missile_damage'      => gen_damage({'weapon' => $missile_weapon,'type' => 'missile'}),
         'armor'               => $armor,
-        'helmet'              => gen_helmet({'class' => $class}),
         'shield'              => $shield,
         'ac'                  => gen_ac({'armor' => $armor, 'shield' => $shield, 'dex' => $dex, 'use_dex_ac' => $use_dex_ac}),
         'hp'                  => gen_hp({'class' => $class, 'race' => $race, 'level' => $level, 'con' => $con}),
@@ -1138,9 +1086,6 @@ sub gen_char
         'chance_know'         => $$int_bonuses{$int}->[1],
         'min_spells'          => $$int_bonuses{$int}->[2],
         'max_spells'          => $$int_bonuses{$int}->[3],
-        'max_retainers'       => $$cha_bonuses{$cha}->[0],
-        'reaction'            => $$cha_bonuses{$cha}->[1],
-        'morale'              => $$cha_bonuses{$cha}->[2],
         'alignment'           => $align,
         'equipment'           => gen_equipment({'class' => $class}),
         'skills'              => gen_thief_skills({'class' => $class, 'race' => $race, 'level' => $level}),
@@ -1183,13 +1128,12 @@ return "   Thievery: \t\t" . $skills->[0] ;
 /magic user'
 my $char = gen_char({ 'use_dex_ac' => 0, 'level' => 1, num_dice => 3, class => '', 'race' => ''});
 
-print "\n\nA Holmes Basic D&D Character\n";
+print "\n\nA White Box: Fantastic Medieval Adventure Game Character\n";
 print "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\n\n";
 print "Name: ",gen_name(),"\n\n";
 print "Level $$char{level} ",ucfirst($$char{race})," ",printable_class({'class' => $$char{class}}),"\n";
 print "Title: ",ucfirst($$char{title}),"\n";
 print "Alignment: $$char{alignment}\n";
-print "Age: $$char{age}\n\n";
 
 print "STR: ",sprintf('%2d',$$char{str}), print_bonuses($$char{str_bonuses}),"\n";
 if ( $$char{class} =~ 'magic user' ) {
@@ -1221,7 +1165,6 @@ if ($$char{class} eq 'cleric') {
 
 print "Armor: ",ucfirst($$char{armor}),"\n";
 print "Shield: ",$$char{shield} eq 'shield' ? 'Yes' : 'None',"\n";
-print "Helm: ",$$char{helmet} eq 'helmet' ? 'Yes' : 'None',"\n\n";
 
 print "Weapons:\n $$char{melee_weapon}\n";
 print " $$char{missile_weapon}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
