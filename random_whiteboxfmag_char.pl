@@ -129,38 +129,44 @@ my $int_bonuses = {
 # Weapon => damage
 my $missile_weapons = {
     'Hand Axe'       => '1d6',
-    'Composite Bow'  => '1d6',
+#    'Composite Bow'  => '1d6',
     'Long Bow'       => '1d6',
-    'Short Bow'      => '1d6',
-    'Heavy Crossbow' => '1d6',
-    'Light Crossbow' => '1d6',
-    'Dagger'         => '1d6',
+    'Short Bow'      => '1d6-1',
+    'Heavy Crossbow' => '1d6+1',
+    'Light Crossbow' => '1d6-1',
+#    'Dagger'         => '1d6',
     'Spear'          => '1d6',
+    'Sling'          => '1d6',
     'None'           => '',
 };
 
 # Weapon => damage
 my $melee_weapons = {
-    'Battle Axe'       => '1d6',
+    'Battle Axe'       => '1d6+1',
     'Hand Axe'         => '1d6',
-    'Dagger'           => '1d6',
+    'Club'             => '1d6',    
+    'Dagger'           => '1d6-1',
     'Flail'            => '1d6',
     'Mace'             => '1d6',
     'Morningstar'      => '1d6',
-    'Pole Arm'         => '1d6',
-    'Halberd'          => '1d6',
+    'Pole Arm'         => '1d6+1',
+#    'Halberd'          => '1d6',
     'Spear'            => '1d6',
-    'Sword'            => '1d6',
-    'Two-handed Sword' => '1d6',
+    'Staff'            => '1d6',
+    'Long Sword'       => '1d6',
+    'Short Sword'      => '1d6-1',
+    'Two-handed Sword' => '1d6+1',
+    'Warhammer'        => '1d6',
 };
 
 # Added equipment for missile weapons
 my $ancillary_equipment = {
-    'Composite Bow'  => 'Quiver & 20 arrows',
+#    'Composite Bow'  => 'Quiver & 20 arrows',
     'Long Bow'       => 'Quiver & 20 arrows',
     'Short Bow'      => 'Quiver & 20 arrows',
     'Heavy Crossbow' => 'Case & 30 quarrels',
     'Light Crossbow' => 'Case & 30 quarrels',
+    'Sling'          => 'Pouch & 20 stones',
 };
 
 # Equipment from http://www.necropraxis.com/2012/07/20/odd-equipment/,
