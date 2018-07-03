@@ -355,9 +355,9 @@ my $classes = {
         'weapons' => ['any'],
         'level'   => {
             # [min-xp,max-xp,HD,sav,title]
-            '1'  => [0,1999,'1d6+1',[13,15,15,15,15],''],
-            '2'  => [2000,3999,'2d6',[12,14,14,14,14],''],
-            '3'  => [4000,7999,'3d6',[11,13,13,13,13],''],
+            '1'  => [0,1999,'1d6+1',[12,14,14,14,14],''],
+            '2'  => [2000,3999,'2d6',[11,13,13,13,13],''],
+            '3'  => [4000,7999,'3d6',[10,12,12,12,12],''],
         },
         xp_bonus => {
             'str' => {
@@ -386,32 +386,32 @@ my $classes = {
         'weapons' => ['any'],
         'level'   => {
             # [min-xp,max-xp,HD,sav,skills,halfling skills,title]
-            '1'  => [0,1199,'1d4',[16,13,12,14,15],   [15,10,20,20,87,10,'1-2'],[25,15,25,30,87,20,'1-3'],'apprentice'],
-            '2'  => [1200,2399,'2d4',[16,13,12,14,15],[20,15,25,25,88,15,'1-2'],[30,20,30,35,87,25,'1-3'],'footpad'],
-            '3'  => [2400,-1,'3d4',[16,13,12,14,15],  [25,20,30,30,89,20,'1-3'],[35,25,35,40,87,30,'1-4'],'robber'],
+            '1'  => [0,1199,'1d6',[14,14,14,14,14],   [2],[2],''],
+            '2'  => [1200,2399,'2d6',[11,13,13,13,13],[2],[2],''],
+            '3'  => [2400,-1,'3d6',[10,12,12,12,12],  [2],[2],''],
         },
         xp_bonus => {
             'dex' => {
-                3  => -20,
-                4  => -20,
-                5  => -20,
-                6  => -20,
-                7  => -10,
-                8  => -10,
+                3  => 0,
+                4  => 0,
+                5  => 0,
+                6  => 0,
+                7  => 0,
+                8  => 0,
                 9  => 0,
                 10 => 0,
                 11 => 0,
                 12 => 0,
-                13 => 5,
-                14 => 5,
-                15 => 10,
-                16 => 10,
-                17 => 10,
-                18 => 10,
+                13 => 0,
+                14 => 0,
+                15 => 5,
+                16 => 5,
+                17 => 5,
+                18 => 5,
             },
         },
     },
-    'fighting man/magic user' => {
+    'fighter/magic user' => {
         'armor'   => ['any'],
         'weapons' => ['any'],
         'level'   => {
@@ -485,7 +485,7 @@ resistance to magic. Halflings are extremely accurate with missiles
 and fire any missile at + 1.
 },
     'elf'      => q{
-Elves can use all the weapons and armor of the fighting man, including
+Elves can use all the weapons and armor of the fighter, including
 all magical weapons, and can also cast spells like a magic-user. They
 can detect secret hidden doors about one-third of the time. They have
 infravision; like dwarves, they can see 60 feet in the dark.  They are
@@ -651,22 +651,22 @@ sub gen_class {
     my $int = $$args{int};
     my $wis = $$args{wis};
     my $dex = $$args{dex};
-    my $classes = ['fighting man','thief','magic user','cleric'];
+    my $classes = ['fighter','thief','magic user','cleric'];
     my $race = $$args{race} || gen_race();
 
     # $smart_class allows us to tweak the class choice logically based
     # on higher prime requisite attributes
     if ( $smart_class && $race eq 'human' ) {
-        return 'fighting man' if $str >= 15;
+        return 'fighter' if $str >= 15;
         return 'cleric' if $wis >= 15;
         return 'magic user' if $wis >= 15;
         return 'thief' if $dex >= 15;
     }
 
     return $classes->[roll_1d4()-1] if ( $race eq 'human' );
-    return 'fighting man/magic user' if ( $race eq 'elf' );
+    return 'fighter/magic user' if ( $race eq 'elf' );
     return $classes->[roll_1d2()-1] if ( $race eq 'halfling' );
-    return 'fighting man';
+    return 'fighter';
 }
 
 sub gen_weapon {
@@ -682,16 +682,16 @@ sub gen_weapon {
         'melee' => {
             'magic user' => ['Dagger'],
             'cleric' => ['Flail','Mace','Morningstar'],
-            'fighting man' => \@melee_weapons,
+            'fighter' => \@melee_weapons,
             'thief' => ['Dagger','Sword','Hand Axe'],
-            'fighting man/magic user' => \@melee_weapons,
+            'fighter/magic user' => \@melee_weapons,
         },
         'missile' => {
             'magic user' => ['Dagger'],
             'cleric' => ['None'],
-            'fighting man' => \@missile_weapons,
+            'fighter' => \@missile_weapons,
             'thief' => \@missile_weapons,
-            'fighting man/magic user' => \@missile_weapons,
+            'fighter/magic user' => \@missile_weapons,
        },
     };
 
@@ -699,16 +699,16 @@ sub gen_weapon {
         'melee' => {
             'magic user' => 1,
             'cleric' => 3,
-            'fighting man' => scalar(@melee_weapons),
+            'fighter' => scalar(@melee_weapons),
             'thief' => 3,
-            'fighting man/magic user' => scalar(@melee_weapons),
+            'fighter/magic user' => scalar(@melee_weapons),
         },
         'missile' => {
             'magic user' => 2,
             'cleric' => 1,
-            'fighting man' => scalar(@missile_weapons),
+            'fighter' => scalar(@missile_weapons),
             'thief' => scalar(@missile_weapons),
-            'fighting man/magic user' => scalar(@missile_weapons),
+            'fighter/magic user' => scalar(@missile_weapons),
         },
     };
 
@@ -799,7 +799,7 @@ sub gen_spells {
     $level = 3 if ($level > 3);
     my $l1_mu_spells = ['Charm Person','Hold Portal','Light','Magic Missile','Protection from Evil','Shield','Sleep','Ventriloquism'];
     return $l1_mu_spells->[roll_1d8()-1] if ( $level == 1 && ($class eq 'magic user' || $race eq 'elf') );
-    return 'None' if ( $race ne 'elf' && (($level == 1 && $class eq 'cleric') || $class eq 'fighting man' || $class eq 'thief' ));
+    return 'None' if ( $race ne 'elf' && (($level == 1 && $class eq 'cleric') || $class eq 'fighter' || $class eq 'thief' ));
 
     my $known_spells = {};
     my $level_stats = $$classes{$class}{'level'}{$level};
@@ -1058,8 +1058,8 @@ sub printable_class {
     my $args = shift;
 
     my $class = $$args{class};
-    return "Fighting-Man" if $class eq 'fighting man';
-    return "Fighting-Man/Magic-User" if $class eq 'fighting man/magic user';
+    return "Fighting-Man" if $class eq 'fighter';
+    return "Fighting-Man/Magic-User" if $class eq 'fighter/magic user';
     return "Magic-User" if $class eq 'magic user';
     return "Cleric" if $class eq 'cleric';
     return "Thief" if $class eq 'thief';
@@ -1084,7 +1084,7 @@ sub gen_char
     # We make some allowance for poor ability scores here, given the
     # choice of class. This mimics the way an actual person chooses
     # class based on their prime requisite scores.
-    $str = 9 if ( ($class eq 'fighting man' || $race eq 'elf') && $str < 9 );
+    $str = 9 if ( ($class eq 'fighter' || $race eq 'elf') && $str < 9 );
     $wis = 9 if ( $class eq 'cleric' && $wis < 9 );
     $dex = 9 if ( $class eq 'thief' && $dex < 9 );
     $int = 9 if ( ($class eq 'magic user' || $race eq 'elf') && $int < 9 );
@@ -1167,7 +1167,8 @@ sub print_saving_throws {
 sub print_thief_skills {
     my $skills = shift;
 
-    return "   Open Lock: \t\t" . $skills->[0] . "%\n   Remove Trap: \t" . $skills->[1] . "%\n   Pick Pocket: \t" . $skills->[2] . "%\n   Move Silently: \t" . $skills->[3] . "%\n   Climb: \t\t" . $skills->[4] . "%\n   Hide in Shadows: \t" . $skills->[5] . "%\n   Hear Noise: \t\t" . $skills->[6];
+ #   return "   Open Lock: \t\t" . $skills->[0] . "%\n   Remove Trap: \t" . $skills->[1] . "%\n   Pick Pocket: \t" . $skills->[2] . "%\n   Move Silently: \t" . $skills->[3] . "%\n   Climb: \t\t" . $skills->[4] . "%\n   Hide in Shadows: \t" . $skills->[5] . "%\n   Hear Noise: \t\t" . $skills->[6];
+return "   Thievery: \t\t" . $skills->[0] ;
 }
 
 
@@ -1178,7 +1179,8 @@ sub print_thief_skills {
 # 'use_dex_ac' = 1 if dexterity modifies armor class
 # 'num_dice' is typically 3 or 4 - how many d6 we roll for each attribute
 # 'race' is exactly one of human, halfling, elf, or dwarf
-# 'class' is exactly one of 'figting man', thief, cleric, or 'fighting man/magic user'
+# 'class' is exactly one of 'figting man', thief, cleric, or 'fighter
+/magic user'
 my $char = gen_char({ 'use_dex_ac' => 0, 'level' => 1, num_dice => 3, class => '', 'race' => ''});
 
 print "\n\nA Holmes Basic D&D Character\n";
