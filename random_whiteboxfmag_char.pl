@@ -144,7 +144,7 @@ my $missile_weapons = {
 my $melee_weapons = {
     'Battle Axe'       => '1d6+1',
     'Hand Axe'         => '1d6',
-    'Club'         => '1d6',    
+    'Club'         => '1d6',
     'Dagger'          => '1d6-1',
     'Flail'          => '1d6',
     'Mace'          => '1d6',
@@ -166,7 +166,7 @@ my $ancillary_equipment = {
     'Short Bow'      => 'Quiver & 20 arrows',
     'Heavy Crossbow' => 'Case & 30 quarrels',
     'Light Crossbow' => 'Case & 30 quarrels',
-    'Sling'        => 'Pouch & 20 stones',
+    'Sling'          => 'Pouch & 20 stones',
 };
 
 # Equipment from http://www.necropraxis.com/2012/07/20/odd-equipment/,
@@ -279,7 +279,7 @@ my $turn_undead = {
 
 # Class data to level 3 as per WB:FMAG
 # Elves are an issue since they can be FM/MU levels 1/1, 2/1, 2/2,
-# 3/2, 3/3 so right now we just spit out level 1 characters. 
+# 3/2, 3/3 so right now we just spit out level 1 characters.
 
 my $classes = {
     'magic user' => {
@@ -478,29 +478,23 @@ my $max_xp_bonus = 15;
 my $max_xp_penalty = 0;
 
 my %race_abilities = (
-    'halfling' => q{
-Out-of-doors Halflings are difficult to see, having the ability to
-vanish into woods or undergrowth with 1-5 on a d6. They are like 
-dwarves in their resistance to magic, +4 on saving throws against magic. 
-Halflings are extremely accurate with missiles and fire any missile at 
-+ 1.  Giant type creatures inflict half damage on halflings.
-},
-    'elf'      => q{
-Elves can use all the weapons and armor of the fighter, including
-all magical weapons, and can also cast spells like a magic-user. They 
-have the same weapon and armor restrictions as magic users with the 
-exception of magic armor.  They can detect secret hidden doors on a 
+    'halfling' => q{Out-of-doors Halflings are difficult to see, having the ability to
+vanish into woods or undergrowth with 1-5 on a d6. They are like
+dwarves in their resistance to magic, +4 on saving throws against magic.
+Halflings are extremely accurate with missiles and fire any missile at
++ 1.  Giant type creatures inflict half damage on halflings.},
+    'elf'      => q{Elves can use all the weapons and armor of the fighter, including
+all magical weapons, and can also cast spells like a magic-user. They
+have the same weapon and armor restrictions as magic users with the
+exception of magic armor.  They can detect secret hidden doors on a
 1-4 on d6 if looking, 1-2 on d6 if not. Elves can speak the languages of
-orcs, hobgoblins and gnolls as well as Elvish and the Common speech.
-},
-    'dwarf'    => q{
-Dwarves are sturdy fighters and are especially resistant to magic, 
+orcs, hobgoblins and gnolls as well as Elvish and the Common speech.},
+    'dwarf'    => q{Dwarves are sturdy fighters and are especially resistant to magic,
 +4 on saving throws against magic. Underground, they can
 detect slanting passages, traps, shifting wails and new construction
-on a 1-4 on d6 if looking, 1-2 on d6 if not.  Giant type creatures 
+on a 1-4 on d6 if looking, 1-2 on d6 if not.  Giant type creatures
 inflict half damage on dwarves. Dwarves can all speak the languages of gnomes,
-kobolds and goblins.
-},
+kobolds and goblins.},
     'human'    => q{},
 );
 
@@ -668,7 +662,7 @@ sub gen_weapon {
             'fighter/magic user' => \@melee_weapons,
         },
         'missile' => {
-            'magic user' => ['Dagger'],
+            'magic user' => ['None'],
             'cleric' => ['Sling'],
             'fighter' => \@missile_weapons,
             'thief' => \@missile_weapons,
@@ -1029,7 +1023,7 @@ sub gen_bhb_melee {
     $bhb_melee += $$classes{$class}{'level'}{$level}->[10];
     
     if ($class eq 'fighter' && $str >= 15){
-        $bhb_melee += 1; 
+        $bhb_melee += 1;
     }
     
 	return $bhb_melee;
@@ -1049,14 +1043,14 @@ sub gen_bhb_missile {
     
     if ($dex >= 15) {
         $bhb_missile += 1;
-    } 
+    }
     elsif ($dex <= 6) {
         $bhb_missile -= 1;
     }
     
     if ($race eq 'halfling') {
         $bhb_missile += 2;
-    } 
+    }
 
 	return $bhb_missile;
 }
@@ -1194,8 +1188,10 @@ print "XP Bonus: ",$$char{xp_bonus} ? "$$char{xp_bonus}%" : 'None',"\n\n";
 
 print "Saves: \n",print_saving_throws($$char{sav}),"\n\n";
 
-print "Spells: ",ucfirst($$char{spells}),"\n\n" if ($$char{class} eq 'magic user' || $$char{race} eq 'elf');
-print "Spells: None at 1st level\n\n" if ($$char{class} eq 'cleric');
+print "Spells: ",ucfirst($$char{spells}),"\n\n"
+            if ($$char{class} eq 'magic user' || $$char{race} eq 'elf');
+print "Spells: None at 1st level\n\n"
+            if ($$char{class} eq 'cleric');
 
 if ($$char{class} eq 'cleric') {
     my @turn = split " ",$$char{turn_undead};
@@ -1207,52 +1203,33 @@ if ($$char{class} eq 'cleric') {
 
 print print_thief_skills($$char{skills}),"\n\n" if ($$char{class} eq 'thief');
 
-print "Armor: ",ucfirst($$char{armor}),"\n";
-print "Shield: ",$$char{shield} eq 'shield' ? 'Yes' : 'None',"\n\n";
+print "Armor: ",ucfirst($$char{armor}),"\tShield: ",$$char{shield} eq 'shield' ? 'Yes' : 'None',"\n\n";
 
-print "Base Hit Bonus:\n";
-print "Melee\t",$$char{bhb_melee},"\n";
-print "Missile\t",$$char{bhb_missile},"\n\n";
+print "Weapons\t\t\tDamage\tBHB\n";
+print " ",$$char{melee_weapon},"\t";
+if (length($$char{melee_weapon}) < 7){print "\t";}
+if (length($$char{melee_weapon}) < 16){print "\t";}
+print $$char{melee_damage},"\t",$$char{bhb_melee},"\n";
 
-print "Weapons\t\t\tDamage\n";
+unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None')
+            {
+                print " ",$$char{missile_weapon},"\t";
+                if (length($$char{missile_weapon}) < 7){print "\t";}
+                if (length($$char{missile_weapon}) < 16){print "\t";}
+                print $$char{missile_damage},"\t",$$char{bhb_missile},"\n";
+            }
+            print "\n";
 
-if (length($$char{melee_weapon}) < 7){
-    print " $$char{melee_weapon}\t\t\t$$char{melee_damage}\n";
-} 
-elsif (length($$char{melee_weapon}) >15){
-    print " $$char{melee_weapon}\t$$char{melee_damage}\n";
-} 
-else {
-print " $$char{melee_weapon}\t\t$$char{melee_damage}\n";
-}
-
-if (length($$char{missile_weapon}) < 7){
-print " $$char{missile_weapon}\t\t\t$$char{missile_damage}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
-} 
-else {
-print " $$char{missile_weapon}\t\t$$char{missile_damage}\n" unless ($$char{melee_weapon} eq $$char{missile_weapon} || $$char{missile_weapon} eq 'None');
-}
-
-print "\nEquipment:\n";
-print " ",join "\n",split ",",$$char{equipment};
-print "\n $$char{ancillary_equipment}\n\n";
+print "Equipment:\n";
+print " ",join "\n",split ",","$$char{equipment}\n";
+print " ",$$char{ancillary_equipment};
+print "\n\n";
 
 if ( $$char{race} ne 'human' ) {
-    print "\nRacial Abilities:\n";
+    print "Racial Abilities:\n";
     print "$$char{race_abilities}\n\n";
 }
 
+print "AC\t9\t8\t7\t6\t5\t4\t3\t2\t1\t0\n";
+            print "To Hit\t10\t11\t12\t13\t14\t15\t16\t27\t18\t19\n\n";
 
-
-print "To Hit  9  8  7  6  5  4  3  2  1 0\n";
-print "AC    ", 
-$$char{bhb_missile}, " ",
-$$char{bhb_missile}+1, " ",
-$$char{bhb_missile}+2, " ",
-$$char{bhb_missile}+3, " ",
-$$char{bhb_missile}+4, " ",
-$$char{bhb_missile}+5, " ",
-$$char{bhb_missile}+6, " ",
-$$char{bhb_missile}+7, " ",
-$$char{bhb_missile}+8, " ",
-$$char{bhb_missile}+9, " "\n;
