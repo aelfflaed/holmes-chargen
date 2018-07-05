@@ -1242,3 +1242,17 @@ if ( $$char{race} ne 'human' ) {
     print "$$char{race_abilities}\n\n";
 }
 
+
+
+print "To Hit  9  8  7  6  5  4  3  2  1 0\n";
+print "AC    ", 
+$$char{bhb_missile}, " ",
+$$char{bhb_missile}+1, " ",
+$$char{bhb_missile}+2, " ",
+$$char{bhb_missile}+3, " ",
+$$char{bhb_missile}+4, " ",
+$$char{bhb_missile}+5, " ",
+$$char{bhb_missile}+6, " ",
+$$char{bhb_missile}+7, " ",
+$$char{bhb_missile}+8, " ",
+$$char{bhb_missile}+9, " "\n;
